@@ -17,3 +17,34 @@ jobs:
       - name: Deploy TU
         run: echo Deploy TU
 
+  validation:
+    environment: validation
+    needs: [build, deploy-tu]
+    runs-on: ubuntu-latest
+    steps:
+      - name: validation
+        run: echo "resultado da function"
+
+  deploy-ti:
+    environment: ti
+    needs: validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy ti
+        run: echo Deploy ti
+
+  deploy-th:
+    environment: th
+    needs: deploy-ti
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy th
+        run: echo Deploy th
+
+  deploy-prd:
+    environment: prd
+    needs: deploy-th
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy prd
+        run: echo Deploy prd
